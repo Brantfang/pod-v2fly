@@ -8,3 +8,4 @@ ports:
     description: v2ray inbound tcp steam
     port: 10086
     onOpen: notify
+    visibility: public

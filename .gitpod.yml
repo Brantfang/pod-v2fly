@@ -3,6 +3,7 @@ tasks:
       sudo wget https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
       sudo bash install-release.sh
       echo "${VRAY_HTTP}" | sudo tee /tmp/vray_config.json > /dev/null 
+      sudo chmod o+rw /var/log/v2ray/*.log
     command: v2ray run -config /tmp/vray_config.json
 ports:
   - name: tcp stream

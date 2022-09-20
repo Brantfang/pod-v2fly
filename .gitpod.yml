@@ -4,7 +4,7 @@ tasks:
       sudo bash install-release.sh
       echo "${VRAY_HTTP}" | sudo tee /tmp/vray_config.json > /dev/null 
       sudo chmod -R o+rw /var/log/v2ray/
-    command: v2ray run -config /tmp/vray_config.json
+    command: sudo v2ray run -config /tmp/vray_config.json
 ports:
   - name: tcp stream
     description: v2ray inbound tcp steam

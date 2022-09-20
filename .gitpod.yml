@@ -2,10 +2,11 @@ tasks:
   - init: |
       sudo wget https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
       sudo bash install-release.sh
-    command: v2ray run -config release/config/vpoint_vmess_freedom.json
+      echo "${VRAY_CONFIG}" | sudo tee /tmp/vray_config.json > /dev/null 
+    command: v2ray run -config /tmp/vray_config.json
 ports:
   - name: tcp stream
     description: v2ray inbound tcp steam
-    port: 10086
+    port: 10087
     onOpen: notify
     visibility: public

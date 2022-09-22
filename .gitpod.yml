@@ -19,4 +19,4 @@ ports:
     description: v2ray inbound tcp steam
     port: 20222
     onOpen: notify
-    visibility: ${VRAY_VISIBILITY}
+    visibility: $(echo ${VRAY_VISIBILITY})

@@ -7,9 +7,15 @@ tasks:
       sudo chmod -R o=rw /var/log/v2ray/
     command: sudo v2ray run -config /tmp/vray_config.json
 
+# write package to file tcpdump -w $(echo ${GITPOD_WORKSPACE_CONTEXT} | jq -r .repository.name).cap
   - name: install tcpdump
     init: |
       gp ports await ${VRAY_PORT}
       sudo apt install tcpdump -y
-    command: sudo tcpdump -i ceth0 tcp port ${VRAY_PORT} or port 443 -w $(echo ${GITPOD_WORKSPACE_CONTEXT} | jq -r .repository.name).cap
+    command: sudo tcpdump -i ceth0 tcp port ${VRAY_PORT} or port 443 
     openMode: split-right
+      
+  - name: watch port
+    init: gp ports await ${VRAY_PORT}
+    command: sudo watch -n 1 -d 'ss -a | grep ${VRAY_PORT}'
+    openMode: tab-after

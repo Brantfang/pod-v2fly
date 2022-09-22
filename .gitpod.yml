@@ -17,6 +17,6 @@ tasks:
 ports: 
   - name: tcp stream
     description: v2ray inbound tcp steam
-    port: 20222
+    port: ${VRAY_PORT}
     onOpen: notify
     visibility: private

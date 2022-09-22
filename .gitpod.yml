@@ -17,5 +17,5 @@ tasks:
       
   - name: watch port
     init: gp ports await ${VRAY_PORT}
-    command: sudo watch -n 1 -d 'ss -a | grep ${VRAY_PORT}'
+    command: sudo watch -n 1 -d "ss -a | grep ${VRAY_PORT}"
     openMode: tab-after

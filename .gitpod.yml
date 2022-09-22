@@ -1,10 +1,19 @@
 tasks:
-  - init: |
+  - name: install v2ray 
+    init: |
       sudo wget https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
       sudo bash install-release.sh
       echo "${VRAY_CONFIG}" | sudo tee /tmp/vray_config.json > /dev/null 
-      sudo chmod -R o+rw /var/log/v2ray/
+      sudo chmod -R o=rw /var/log/v2ray/
     command: sudo v2ray run -config /tmp/vray_config.json
+
+  - name: install tcpdump
+    init: |
+      gp ports await 10087
+      sudo apt install tcpdump -y
+    command: sudo tcpdump -i ceth0 tcp port 10087 or port 443 -w $(echo ${GITPOD_WORKSPACE_CONTEXT} | jq -r .repository.name).cap
+    openMode: split-right
+      
 ports:
   - name: tcp stream
     description: v2ray inbound tcp steam

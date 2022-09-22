@@ -9,14 +9,14 @@ tasks:
 
   - name: install tcpdump
     init: |
-      gp ports await 10087
+      gp ports await ${VRAY_PORT}
       sudo apt install tcpdump -y
-    command: sudo tcpdump -i ceth0 tcp port 10087 or port 443 -w $(echo ${GITPOD_WORKSPACE_CONTEXT} | jq -r .repository.name).cap
+    command: sudo tcpdump -i ceth0 tcp port ${VRAY_PORT} or port 443 -w $(echo ${GITPOD_WORKSPACE_CONTEXT} | jq -r .repository.name).cap
     openMode: split-right
       
 ports:
   - name: tcp stream
     description: v2ray inbound tcp steam
-    port: 10087
+    port: ${VRAY_PORT}
     onOpen: notify
-    visibility: public
+    visibility: ${VRAY_VISIBILITY}
